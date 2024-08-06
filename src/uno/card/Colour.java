@@ -6,8 +6,7 @@ public enum Colour {
     YELLOW("\033[33m"),
     GREEN("\033[32m"),
     BLUE("\033[34m"),
-    WILD("\033[37m"),
-    BOLDRESET("\033[0m" + "\033[1m");
+    WILD("\033[37m");
 
     private final String colorCode;
 
