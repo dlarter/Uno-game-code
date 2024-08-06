@@ -10,16 +10,16 @@ import java.util.Stack;
 import java.util.Scanner;
 
 public class GameLogic {
+
     private Deck deck;
     private ArrayList<Player> players;
-
     private Card currentCard;
     private Stack<Card> discardPile;
     private int currentPlayerIndex;
     private boolean directionClockwise;
 
     //ANSI colour codes
-    final String BOLD =  Colour.BOLDRESET.getColourCode();
+    final String BOLD =  "\033[0m" + "\033[1m";
 
     public GameLogic() {
         this.players = new ArrayList<>();
@@ -41,9 +41,7 @@ public class GameLogic {
                 if (playerCount < 2 || playerCount > 4) {
                     System.out.println("Needs to be 2-4 players.");
                 } else {
-                    for (int i = 0; i < playerCount; i++) {
-                        players.add(new Player("Player " + (i + 1))); // Creates all players
-                    }
+                    createPlayers(playerCount);
                     break; // Exits the loop once valid answer is chosen and players created
                 }
             } catch (InputMismatchException e) { //Catches error if a number is not entered
@@ -51,6 +49,7 @@ public class GameLogic {
                 scanner.next(); // Clears scanner
             }
         }
+
 
         //deals initial cards for all players
         for (Player player : players) {
@@ -61,7 +60,6 @@ public class GameLogic {
         while (true) {
 
             Player currentPlayer = players.get(currentPlayerIndex);
-            System.out.println();
             System.out.println(BOLD + "Current card: " + currentCard.cardString()); //Prints current playing uno.card
             currentPlayer.printHand();
             System.out.println("Pick your card by typing the number or choose 0 to draw");
@@ -72,13 +70,13 @@ public class GameLogic {
             // if 0 -> Draw uno.card else checks if uno.card is valid and either plays it or loops back till a valid uno.card is given
             if (pickedCardNumber == 0) {
                 currentPlayer.getHand().add(deck.drawCard());
-                System.out.println("Drawn uno.card: " + currentPlayer.getHand().get(currentPlayer.getHand().size() - 1));
+                System.out.println("Drawn card: " + currentPlayer.getHand().get(currentPlayer.getHand().size() - 1).cardString());
                 continue; //loops to while loop so the same person plays again
             } else {
                 Card pickedCard = currentPlayer.getHand().get(pickedCardNumber - 1);
                 if (isValidCard(currentCard, pickedCard)) { //checks if uno.card can be played
                     discardPile.add(currentCard);
-                    pickedCard.onPlay(this); // if special uno.card will apply actions
+                    pickedCard.onPlay(this); // if special card will apply actions
                     currentCard = pickedCard;
                     currentPlayer.getHand().remove(pickedCardNumber-1);
                 } else {
@@ -92,7 +90,7 @@ public class GameLogic {
                 System.out.println(currentPlayer.getName() + " WON!!!");
                 break;
             } else { //Else statements sets index of next player
-               currentPlayerIndex = nextPlayerIndex(currentPlayerIndex);
+                currentPlayerIndex = nextPlayerIndex(currentPlayerIndex);
             }
 
         }
@@ -147,6 +145,14 @@ public class GameLogic {
             } else {
                 return currentPlayerIndex-1;
             }
+        }
+    }
+
+    public void createPlayers(int numberOfPlayers){
+        Scanner scanner = new Scanner(System.in);
+        for(int i=0; i<numberOfPlayers; i++){
+            System.out.println("Enter player "+(i+1)+"'s name");
+            players.add(new Player(scanner.nextLine()));
         }
     }
 
