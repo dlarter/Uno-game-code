@@ -14,7 +14,7 @@ public class WildDrawCard extends Card {
 
     @Override
     public void onPlay(GameLogic game) {
-        String BOLD = Colour.BOLDRESET.getColourCode();
+        String BOLD = "\033[0m" + "\033[1m";
         Scanner scanner = new Scanner(System.in);
         System.out.println("Wild card played, pick a colour");
         System.out.println(Colour.RED.getColourCode() + "1: Red");
