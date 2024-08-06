@@ -30,8 +30,7 @@ public class Player {
 
     //Prints all players cards
     public void printHand(){
-        System.out.println();
-        System.out.println(BOLD + Colour.YELLOW.getColourCode() + name + " CARDS");
+        System.out.println(BOLD + Colour.YELLOW.getColourCode() + name + "'s CARDS");
         System.out.println("====================" + BOLD);
         System.out.println("0: " + Colour.YELLOW.getColourCode() +"DRAW CARD !" + BOLD);
         for(int i=0; i<hand.size(); i++){
@@ -39,6 +38,5 @@ public class Player {
             System.out.println((i+1)+": " + currentCard.cardString() + BOLD);
         }
         System.out.println(Colour.YELLOW.getColourCode() + "====================" + BOLD);
-        System.out.println();
     }
 }
