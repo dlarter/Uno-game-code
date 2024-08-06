@@ -14,13 +14,15 @@ public class WildCard extends Card {
 
     @Override
     public void onPlay(GameLogic game) {
-        String BOLD = Colour.BOLDRESET.getColourCode();
+        String BOLD = "\033[0m" + "\033[1m";
         Scanner scanner = new Scanner(System.in);
+        System.out.println("\033[0m" + "\033[1m" + "====================" + BOLD);
         System.out.println("Wild card played, pick a colour");
         System.out.println(Colour.RED.getColourCode() + "1: Red");
         System.out.println(Colour.YELLOW.getColourCode() +"2: Yellow");
         System.out.println(Colour.GREEN.getColourCode() + "3: Green");
         System.out.println(Colour.BLUE.getColourCode() + "4: Blue");
+        System.out.println("\033[0m" + "\033[1m" + "====================" + BOLD);
 
         int colourChoice = 0;
         while (colourChoice < 1 || colourChoice > 4) {
