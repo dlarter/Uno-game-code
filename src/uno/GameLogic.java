@@ -32,14 +32,17 @@ public class GameLogic {
 
     public void start() {
         Scanner scanner = new Scanner(System.in); // Scanner to read user inputs
-
+        System.out.println(BOLD + "===============");
+        System.out.println("||    UNO    ||");
+        System.out.println("===============");
+        System.out.println();
         //While statement gets the amount of players and creates them
         while (true) {
-            System.out.println(BOLD + "How many players (2-4)");
+            System.out.println(BOLD + "Enter how many players are going to be playing  (Needs to be a number between 2 - 4 players)");
             try {
                 int playerCount = scanner.nextInt();
                 if (playerCount < 2 || playerCount > 4) {
-                    System.out.println("Needs to be 2-4 players.");
+                    System.out.println("Need to enter a number between 2-4");
                 } else {
                     createPlayers(playerCount);
                     break; // Exits the loop once valid answer is chosen and players created
@@ -67,14 +70,14 @@ public class GameLogic {
 
             int pickedCardNumber = validPickCheck(scanner, currentPlayer); //returns value of input, will loop till a valid response is given
 
-            // if 0 -> Draw uno.card else checks if uno.card is valid and either plays it or loops back till a valid uno.card is given
+            // if 0 -> Draw card else checks if uno.card is valid and either plays it or loops back till a valid uno.card is given
             if (pickedCardNumber == 0) {
                 currentPlayer.getHand().add(deck.drawCard());
                 System.out.println("Drawn card: " + currentPlayer.getHand().get(currentPlayer.getHand().size() - 1).cardString());
                 continue; //loops to while loop so the same person plays again
             } else {
                 Card pickedCard = currentPlayer.getHand().get(pickedCardNumber - 1);
-                if (isValidCard(currentCard, pickedCard)) { //checks if uno.card can be played
+                if (isValidCard(currentCard, pickedCard)) { //checks if card can be played
                     discardPile.add(currentCard);
                     pickedCard.onPlay(this); // if special card will apply actions
                     currentCard = pickedCard;
@@ -127,7 +130,7 @@ public class GameLogic {
                 }
             } catch (InputMismatchException e) { //Catches error if a number is not entered
                 System.out.println("Invalid input. Please enter a number.");
-                scanner.next(); // Clears scanner
+                scanner.next(); // Makes scanner ready for next turn
             }
         }
     }
@@ -179,6 +182,7 @@ public class GameLogic {
     public void setCurrentPlayerIndex(int currentPlayerIndex) {
         this.currentPlayerIndex = currentPlayerIndex;
     }
+
 }
 
 

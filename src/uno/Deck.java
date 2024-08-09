@@ -21,7 +21,7 @@ public class Deck {
         for (Colour colour : Colour.values()) {  //loop through all uno.card colour types
             if (colour == Colour.WILD) continue;
 
-            cards.add(new NumberCard(colour, 0)); //Add one 0 uno.card for each colour
+            cards.add(new NumberCard(colour, 0)); //Add one 0 card for each colour
             for (int i = 1; i <= 9; i++) { //Loop to add all number cards, two of each colour and number
                 cards.add(new NumberCard(colour, i));
                 cards.add(new NumberCard(colour, i));
@@ -57,7 +57,7 @@ public class Deck {
         Collections.shuffle(cards);
     }
 
-    //Draws uno.card from initial deck and removes from stack
+    //Draws card from initial deck and removes from stack
     public Card drawCard() {
         return cards.pop();
     }
