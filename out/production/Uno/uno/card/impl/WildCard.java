@@ -4,6 +4,7 @@ import uno.GameLogic;
 import uno.card.Card;
 import uno.card.Colour;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class WildCard extends Card {
@@ -37,6 +38,27 @@ public class WildCard extends Card {
                 scanner.next();
             }
         }
+        setColour(colourChoice);
+
+        System.out.println("You picked: " + this.getColour().getColourCode() + this.getColour());
+    }
+
+    @Override
+    public String cardString() {
+        if (this.getColour() == Colour.WILD) {
+            return "Wild Card";
+        } else {
+            return colour.getColourCode() + this.getColour() + ": Wild Card";
+        }
+    }
+
+    public void setRandomColour(){
+        Random rand = new Random();
+        int randomInt = rand.nextInt(4)+1;
+        setColour(randomInt);
+    }
+
+    private void setColour(int colourChoice){
         switch (colourChoice) {
             case 1:
                 this.setColour(Colour.RED);
@@ -50,17 +72,6 @@ public class WildCard extends Card {
             case 4:
                 this.setColour(Colour.BLUE);
                 break;
-        }
-
-        System.out.println("You picked: " + this.getColour().getColourCode() + this.getColour());
-    }
-
-    @Override
-    public String cardString() {
-        if (this.getColour() == Colour.WILD) {
-            return "Wild Card";
-        } else {
-            return colour.getColourCode() + this.getColour() + ": Wild Card";
         }
     }
 }
