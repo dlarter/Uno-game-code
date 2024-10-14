@@ -13,7 +13,7 @@ public class DrawTwoCard extends Card {
     @Override
     public void onPlay(GameLogic game) { //Draws two cards for next player
         int currentPlayerIndex = game.nextPlayerIndex(game.getCurrentPlayerIndex());
-        Player nextPlayer = game.getPlayers().get(currentPlayerIndex);
+        Player nextPlayer = game.getPlayers()[currentPlayerIndex];
         nextPlayer.getHand().add(game.getDeck().drawCard());
         nextPlayer.getHand().add(game.getDeck().drawCard());
         System.out.println(nextPlayer.getName() + ": Draws two cards");
