@@ -1,0 +1,28 @@
+package uno;
+
+import java.sql.*;
+
+public class sqlTest {
+
+    public static void main(String[] args) {
+        try {
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:mysql://127.0.0.1:3306/uno_game",
+                    "root",
+                    "password"
+            );
+
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT * FROM game_details");
+
+
+            while (resultset.next()) {
+                System.out.println(resultset.getString("player_count"));
+                System.out.println(resultset.getString("player_winner"));
+                System.out.println(resultset.getString("rounds_played"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
