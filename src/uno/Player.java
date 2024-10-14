@@ -17,7 +17,7 @@ public class Player {
         this.hand = new ArrayList<>();
         this.isUno = false;
     }
-    //test
+
     //Prints all players cards
     public void printHand(){
         System.out.println(BOLD + Colour.YELLOW.getColourCode() + name + "'s CARDS");
