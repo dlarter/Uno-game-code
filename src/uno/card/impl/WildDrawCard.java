@@ -5,6 +5,7 @@ import uno.Player;
 import uno.card.Card;
 import uno.card.Colour;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class WildDrawCard extends Card {
@@ -36,27 +37,14 @@ public class WildDrawCard extends Card {
             }
         }
         //Sets colour code for the card
-        switch (colourChoice){
-            case 1:
-                this.setColour(Colour.RED);
-                break;
-            case 2:
-                this.setColour(Colour.YELLOW);
-                break;
-            case 3:
-                this.setColour(Colour.GREEN);
-                break;
-            case 4:
-                this.setColour(Colour.BLUE);
-                break;
-        }
+        setColour(colourChoice);
 
         System.out.println("You picked: " + this.getColour());
 
 
         //Section below draws the four cards for the next player
         int currentPlayerIndex = game.nextPlayerIndex(game.getCurrentPlayerIndex());
-        Player player = game.getPlayers().get(currentPlayerIndex);
+        Player player = game.getPlayers()[currentPlayerIndex];
         player.getHand().add(game.getDeck().drawCard());
         player.getHand().add(game.getDeck().drawCard());
         player.getHand().add(game.getDeck().drawCard());
@@ -70,6 +58,29 @@ public class WildDrawCard extends Card {
             return "Wild Card - Pick up 4";
         } else {
             return colour.getColourCode() + this.getColour() + ": Wild Card - Pick up 4";
+        }
+    }
+
+    public void setRandomColour(){
+        Random rand = new Random();
+        int randomInt = rand.nextInt(4)+1;
+        setColour(randomInt);
+    }
+
+    private void setColour(int colourChoice){
+        switch (colourChoice) {
+            case 1:
+                this.setColour(Colour.RED);
+                break;
+            case 2:
+                this.setColour(Colour.YELLOW);
+                break;
+            case 3:
+                this.setColour(Colour.GREEN);
+                break;
+            case 4:
+                this.setColour(Colour.BLUE);
+                break;
         }
     }
 }
