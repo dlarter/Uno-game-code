@@ -12,7 +12,7 @@ public class SkipCard extends Card {
     @Override
     public void onPlay(GameLogic game) {
         int nextPlayer = game.nextPlayerIndex(game.getCurrentPlayerIndex());
-        System.out.println(game.getPlayers().get(nextPlayer).getName()+" skips turn");
+        System.out.println(game.getPlayers()[(nextPlayer)].getName()+" skips turn");
         game.setCurrentPlayerIndex(nextPlayer);
 
     }
