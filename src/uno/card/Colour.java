@@ -10,6 +10,7 @@ public enum Colour {
 
     private final String colorCode;
 
+    //test
     Colour(String colorCode) {
         this.colorCode = colorCode;
     }
