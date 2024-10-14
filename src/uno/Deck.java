@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.Stack;
 
 public class Deck {
-    private final Stack<Card> cards = new Stack<>();
+    private Stack<Card> cards = new Stack<>();
 
     public Deck() {
         initializeDeck();
@@ -64,5 +64,9 @@ public class Deck {
 
     public Stack<Card> getCards() {
         return cards;
+    }
+
+    public void setCards(Stack<Card> cards){
+        this.cards=cards;
     }
 }
