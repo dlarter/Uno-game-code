@@ -11,16 +11,23 @@ public class ReverseCard extends Card {
 
     @Override
     public void onPlay(GameLogic game) { //swaps whatever the current game direction is to the opposite
-        if (game.isDirectionClockwise()){
-            game.setDirectionClockwise(false);
-        }else{
-            game.setDirectionClockwise(true);
+        if (game.getPlayers().length == 2) {
+            int nextPlayer = game.nextPlayerIndex(game.getCurrentPlayerIndex());
+            System.out.println(game.getPlayers()[nextPlayer].getName()+" skips turn");
+            game.setCurrentPlayerIndex(nextPlayer);
+        } else {
+            if (game.isDirectionClockwise()) {
+                game.setDirectionClockwise(false);
+            } else {
+                game.setDirectionClockwise(true);
+            }
         }
+
     }
 
     @Override
     public String cardString() {
-        return colour.getColourCode() + "Reverse card - "+ getColour();
+        return colour.getColourCode() + "Reverse card - " + getColour();
 
     }
 }
